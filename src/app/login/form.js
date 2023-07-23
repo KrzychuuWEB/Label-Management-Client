@@ -2,7 +2,7 @@ import React from "react";
 import {TextField} from "@mui/material";
 import styled from "@emotion/styled";
 
-const ActionButtons = styled('div')(({ theme }) => ({
+const ActionButtons = styled('div')(() => ({
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",

@@ -14,7 +14,7 @@ const LoginPage = () => {
             password: "",
         },
         validationSchema: loginValidationSchema,
-        onSubmit: (values, actions) => {
+        onSubmit: (values) => {
             console.log(values);
         }
     });

@@ -1,14 +1,15 @@
 import React from "react";
-import {Box, Icon, Paper, Typography} from "@mui/material";
+import {Paper, Typography} from "@mui/material";
 import styled from "@emotion/styled";
+import Image from "next/image";
 
-const Logo = styled('div')(({ theme }) => ({
+const Logo = styled('div')(() => ({
     display: "flex",
     justifyContent: "center",
     marginBottom: 20,
 }));
 
-const BoxWithLogo = ({ children, title }) => {
+const BoxWithLogo = ({children, title}) => {
     return (
         <Paper
             elevation={2}
@@ -21,7 +22,7 @@ const BoxWithLogo = ({ children, title }) => {
             }}
         >
             <Logo>
-                <img
+                <Image
                     src="/logo.png"
                     alt="App logo"
                 />
@@ -36,7 +37,7 @@ const BoxWithLogo = ({ children, title }) => {
                 {title}
             </Typography>
 
-                {children}
+            {children}
         </Paper>
     );
 };
