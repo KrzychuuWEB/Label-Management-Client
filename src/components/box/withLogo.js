@@ -9,22 +9,26 @@ const Logo = styled('div')(() => ({
     marginBottom: 20,
 }));
 
+const RWD = styled(Paper)(({ theme }) => ({
+    [theme.breakpoints.down('md')]: {
+        width: "90%",
+    },
+    marginTop: 120,
+    padding: 40,
+    width: 500,
+    marginLeft: "auto",
+    marginRight: "auto",
+}));
+
 const BoxWithLogo = ({children, title}) => {
     return (
-        <Paper
-            elevation={2}
-            sx={{
-                marginTop: 5,
-                padding: 5,
-                width: 500,
-                marginLeft: "auto",
-                marginRight: "auto",
-            }}
-        >
+        <RWD elevation={2}>
             <Logo>
                 <Image
                     src="/logo.png"
                     alt="App logo"
+                    width={160}
+                    height={100}
                 />
             </Logo>
 
@@ -38,7 +42,7 @@ const BoxWithLogo = ({children, title}) => {
             </Typography>
 
             {children}
-        </Paper>
+        </RWD>
     );
 };
 

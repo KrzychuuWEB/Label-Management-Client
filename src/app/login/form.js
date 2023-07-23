@@ -6,7 +6,7 @@ const ActionButtons = styled('div')(() => ({
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
-    marginTop: 20
+    marginTop: 30
 }));
 
 const LoginForm = ({formik, actionButtons}) => {
