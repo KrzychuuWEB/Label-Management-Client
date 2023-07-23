@@ -1,11 +1,11 @@
 "use client"
 
 import React from "react";
-import {AppBar, Box, Button, IconButton, Toolbar, Tooltip, Typography} from "@mui/material";
+import {AppBar, Box, Button, Icon, IconButton, Toolbar, Tooltip} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import Link from "next/link";
 import LeftMenu from "@/components/menu/leftmenu";
-import {APP_NAME} from "@/utils/constants";
+import {routes} from "@/utils/routes";
 
 const MenuBar = () => {
     const [toggleMenu, setToggleMenu] = React.useState({open: false});
@@ -20,7 +20,7 @@ const MenuBar = () => {
 
     return (
         <Box>
-            <AppBar position="fixed" color='inherit' >
+            <AppBar position="fixed" color='inherit'>
                 <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                     <Box sx={{display: "flex", alignItems: "center"}}>
                         <div>
@@ -40,15 +40,25 @@ const MenuBar = () => {
 
                         <div>
                             <Tooltip title="Strona główna">
-                                <Typography color="primary" variant="h6" component={Link} href="/">
-                                    {APP_NAME}
-                                </Typography>
+                                <Link href={routes.home}>
+                                    <Icon
+                                        sx={{width: 80, height: 45}}
+                                        component="img"
+                                        src="/logo.png"
+                                        alt="App logo"
+                                    />
+                                </Link>
                             </Tooltip>
                         </div>
                     </Box>
 
                     <div>
-                        <Button color="primary">Login</Button>
+                        <Button
+                            color="primary"
+                            href={routes.login}
+                        >
+                            Login
+                        </Button>
                     </div>
                 </Toolbar>
             </AppBar>

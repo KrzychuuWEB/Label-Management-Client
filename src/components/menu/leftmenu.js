@@ -1,6 +1,7 @@
 import React from "react";
 import {Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import {Home} from "@mui/icons-material";
+import {routes} from "@/utils/routes";
 
 const LeftMenu = ({isOpen, toggleDrawer}) => {
     return (
@@ -18,7 +19,7 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                 >
                     <List>
                         <ListItem key="Home" disablePadding>
-                            <ListItemButton href="/">
+                            <ListItemButton href={routes.home}>
                                 <ListItemIcon>
                                     <Home/>
                                 </ListItemIcon

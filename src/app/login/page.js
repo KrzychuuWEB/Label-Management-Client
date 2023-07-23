@@ -1,10 +1,40 @@
+"use client"
+
 import React from "react";
+import {Button} from "@mui/material";
+import LoginForm from "@/app/login/form";
+import {useFormik} from "formik";
+import {loginValidationSchema} from "@/app/login/formValid";
+import BoxWithLogo from "@/components/box/withLogo";
 
 const LoginPage = () => {
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            password: "",
+        },
+        validationSchema: loginValidationSchema,
+        onSubmit: (values, actions) => {
+            console.log(values);
+        }
+    });
+
     return (
-        <div>
-            login page!
-        </div>
+        <BoxWithLogo
+            title="Zaloguj się"
+        >
+            <LoginForm
+                formik={formik}
+                actionButtons={(
+                    <Button
+                        type="submit"
+                        variant="contained"
+                    >
+                        Zaloguj
+                    </Button>
+                )}
+            />
+        </BoxWithLogo>
     );
 };
 
