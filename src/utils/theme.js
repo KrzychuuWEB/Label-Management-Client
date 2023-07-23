@@ -1,12 +1,12 @@
 "use client"
 
 import {createTheme} from "@mui/material/styles";
-import {green, pink} from "@mui/material/colors";
+import {pink} from "@mui/material/colors";
 
 export const myTheme = createTheme({
     palette: {
         primary: {
-            main: green[700],
+            main: "#5A723A",
         },
         secondary: {
             main: pink[400],
