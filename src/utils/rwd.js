@@ -6,7 +6,7 @@ export const RWD = styled('main')(({theme}) => ({
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 70,
+    marginTop: 90,
     padding: theme.spacing(1.5),
 
     [theme.breakpoints.down('xs')]: {

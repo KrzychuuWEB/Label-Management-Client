@@ -62,7 +62,7 @@ const MenuBar = () => {
                             color="primary"
                             href={routes.login}
                         >
-                            Login
+                            Zaloguj się
                         </Button>
                     </div>
                 </Toolbar>
