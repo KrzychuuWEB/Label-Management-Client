@@ -11,7 +11,8 @@ const TextEditor = ({
                         setLabelContentId,
                         textEditorContent,
                         setTextEditorContent,
-                        setTextEditorMode
+                        setTextEditorMode,
+                        setDisplay,
                     }) => {
     const handleEditorChange = (content) => {
         setTextEditorContent(content);
@@ -39,10 +40,12 @@ const TextEditor = ({
         ]));
 
         setTextEditorMode(false);
+        setDisplay(false)
     };
 
     const closeEditMode = () => {
         setLabelContentId(false);
+        setDisplay(false)
     }
 
     return (
@@ -62,7 +65,7 @@ const TextEditor = ({
                             addNewTextToState()
                         }}
                     >
-                        Dodaj tekst
+                        Dodaj
                     </Button>
                 )
             }
@@ -74,7 +77,7 @@ const TextEditor = ({
                             closeEditMode()
                         }}
                     >
-                        Zakończ edytowanie
+                        Edytuj
                     </Button>
                 )
             }
