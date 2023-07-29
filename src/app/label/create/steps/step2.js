@@ -3,7 +3,16 @@
 import React, {useState} from "react";
 import styled from "@emotion/styled";
 import {IconButton, Tooltip, Typography} from "@mui/material";
-import {AddPhotoAlternate, ArrowBack, CropRotate, Edit, Extension, OpenWith, TextFields} from "@mui/icons-material";
+import {
+    AddPhotoAlternate,
+    ArrowBack,
+    BugReport,
+    CropRotate,
+    Edit,
+    Extension,
+    OpenWith,
+    TextFields
+} from "@mui/icons-material";
 import 'react-quill/dist/quill.snow.css';
 import parse from 'html-react-parser';
 import TextEditor from "@/components/textEditor/editor";
@@ -39,6 +48,19 @@ const CreateLabelStep2 = () => {
     const [textEditorMode, setTextEditorMode] = useState(false);
     const [display, setDisplay] = useState(false);
     const [showIconsForId, setShowIconsForId] = useState(false);
+
+    const getPosition = (event, dragElement, itemId) => {
+        const stateToUpdate = [...labelTextContent];
+        stateToUpdate.map(item => {
+            if (item.id === itemId) {
+                item.x = dragElement.x;
+                item.y = dragElement.y;
+            }
+            return item;
+        });
+
+        setLabelTextContent(stateToUpdate);
+    };
 
     return (
         <div>
@@ -77,6 +99,15 @@ const CreateLabelStep2 = () => {
                                     <CropRotate/>
                                 </IconButton>
                                 {/*</Tooltip>*/}
+
+                                <IconButton
+                                    color="secondary"
+                                    onClick={() => {
+                                        console.log(labelTextContent);
+                                    }}
+                                >
+                                    <BugReport/>
+                                </IconButton>
                             </div>
                         )
                     }
@@ -145,6 +176,10 @@ const CreateLabelStep2 = () => {
                                     key={item.id}
                                     bounds="parent"
                                     handle=".change-position"
+                                    position={{x: item.x, y: item.y}}
+                                    onStop={(event, dragElement) =>
+                                        getPosition(event, dragElement, item.id)
+                                    }
                                 >
                                     <div
                                         onMouseEnter={() => setShowIconsForId(item.id)}

@@ -36,6 +36,8 @@ const TextEditor = ({
             ...prevState, {
                 id: prevState.length + 1,
                 text: textEditorContent,
+                x: 0,
+                y: 0,
             }
         ]));
 
