@@ -3,8 +3,8 @@
 import React from "react";
 import {Button, Paper, Step, StepLabel, Stepper} from "@mui/material";
 import styled from "@emotion/styled";
-import CreateLabelStep2 from "@/app/label/create/steps/step2";
-import CreateLabelStep1 from "@/app/label/create/steps/step1";
+import CreateLabelStep2 from "@/app/labels/create/steps/step2";
+import CreateLabelStep1 from "@/app/labels/create/steps/step1";
 
 const steps = [
     "Podstawowe informacje",
@@ -13,7 +13,7 @@ const steps = [
 ];
 
 const CustomPaper = styled(Paper)(() => ({
-    padding: 25,
+    padding: 35,
 }));
 
 const CustomButtons = styled('div')(() => ({

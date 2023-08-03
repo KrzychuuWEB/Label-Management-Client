@@ -94,7 +94,7 @@ const CreateLabelStep2 = () => {
                                 </IconButton>
                                 {/*</Tooltip>*/}
 
-                                {/*<Tooltip title="Obróc element">*/}
+                                {/*<Tooltip title="Obróć element">*/}
                                 <IconButton color="primary" disabled>
                                     <CropRotate/>
                                 </IconButton>

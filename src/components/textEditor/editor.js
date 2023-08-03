@@ -56,7 +56,7 @@ const TextEditor = ({
                 value={textEditorContent}
                 onChange={handleEditorChange}
                 modules={{
-                    toolbar: ["bold"]
+                    toolbar: ["bold", "italic", "underline", "strike"],
                 }}
                 theme="snow"
             />
