@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
-import {Home, Label} from "@mui/icons-material";
+import {Home, Inventory, Label} from "@mui/icons-material";
 import {routes} from "@/utils/routes";
 
 const LeftMenu = ({isOpen, toggleDrawer}) => {
@@ -29,7 +29,17 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                         </ListItem>
 
                         <ListItem disablePadding>
-                            <ListItemButton href={routes.label.create}>
+                            <ListItemButton href={routes.products.create}>
+                                <ListItemIcon>
+                                    <Inventory />
+                                </ListItemIcon
+                                >
+                                <ListItemText primary="Dodaj produkt"/>
+                            </ListItemButton>
+                        </ListItem>
+
+                        <ListItem disablePadding>
+                            <ListItemButton href={routes.labels.create}>
                                 <ListItemIcon>
                                     <Label />
                                 </ListItemIcon

@@ -1,7 +1,10 @@
 export const routes = {
     home: "/",
     login: "/login",
-    label: {
+    labels: {
         create: "/labels/create",
+    },
+    products: {
+        create: "/products/create",
     },
 }
