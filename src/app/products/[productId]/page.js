@@ -81,7 +81,7 @@ const GetProductById = () => {
                         : (
                             <Alert severity="info" sx={{marginTop: 5}}>
                                 <AlertTitle>Brak danych</AlertTitle>
-                                Wygląda na to że <strong>{product.name}</strong> nie ma jeszcze etykiet :(
+                                Wygląda na to że produkt <strong>{product.name}</strong> nie ma jeszcze etykiet :(
                             </Alert>
                         )
             }
