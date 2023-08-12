@@ -18,8 +18,8 @@ const Flex = styled('div')(() => ({
 }));
 
 const GetProductById = () => {
-    const params = useParams();
-    const productId = params.productId;
+    // const params = useParams();
+    // const productId = params.productId;
     const product = inMemoryGetProduct;
     const labels = inMemoryGetLabels;
     const [activeTab, setActiveTab] = useState(0);
