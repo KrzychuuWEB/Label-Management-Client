@@ -39,6 +39,16 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                         </ListItem>
 
                         <ListItem disablePadding>
+                            <ListItemButton href={routes.products.getById(1)}>
+                                <ListItemIcon>
+                                    <Inventory />
+                                </ListItemIcon
+                                >
+                                <ListItemText primary="Pokaż produkt"/>
+                            </ListItemButton>
+                        </ListItem>
+
+                        <ListItem disablePadding>
                             <ListItemButton href={routes.labels.create}>
                                 <ListItemIcon>
                                     <Label />

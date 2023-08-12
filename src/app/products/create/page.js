@@ -6,8 +6,8 @@ import {Button, TextField} from "@mui/material";
 import styled from "@emotion/styled";
 import {inMemoryNutritionalNames} from "@/inMemoryDatabase/nutritionalNames";
 import {useFormik} from "formik";
-import NutritionalTable from "@/app/products/components/nutritionalTable";
-import NutritionalDialog from "@/app/products/components/nutritionalDialog";
+import NutritionalTable from "@/app/products/create/components/nutritionalTable";
+import NutritionalDialog from "@/app/products/create/components/nutritionalDialog";
 import {productValidateSchema} from "@/app/products/formValid";
 
 const ActionButton = styled('div')(() => ({

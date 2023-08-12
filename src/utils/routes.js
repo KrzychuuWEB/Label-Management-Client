@@ -6,5 +6,6 @@ export const routes = {
     },
     products: {
         create: "/products/create",
+        getById: (productId) => `/products/${productId}`,
     },
 }
