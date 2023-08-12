@@ -1,4 +1,4 @@
-export const inMemoryNutritionValues = [
+export const nutritionalValuesTable = [
     {
         id: 1,
         name: "Wartość odżywcza",

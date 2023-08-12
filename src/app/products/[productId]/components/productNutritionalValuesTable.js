@@ -1,5 +1,5 @@
 import React from "react";
-import {Paper, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import {Paper, Skeleton, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 import styled from "@emotion/styled";
 
 const CustomPaper = styled(Paper)(() => ({
@@ -15,27 +15,31 @@ const CustomTableRow = styled(TableRow)(({theme}) => ({
     },
 }));
 
-const NutritionalTableValues = ({product}) => {
+const NutritionalTableValues = ({product, isLoading}) => {
     return (
         <CustomPaper>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Nazwa</TableCell>
-                        <TableCell align="right">Wartość</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {
-                        product.nutritionalValues.map(item => (
-                            <CustomTableRow key={item.id}>
-                                <TableCell>{item.name}</TableCell>
-                                <TableCell align="right">{item.value}</TableCell>
-                            </CustomTableRow>
-                        ))
-                    }
-                </TableBody>
-            </Table>
+            {
+                isLoading
+                ? (<Skeleton variant="rectangular" width={"100%"} height={400}/>)
+                    : (<Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Nazwa</TableCell>
+                                <TableCell align="right">Wartość</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {
+                               product.nutritionalValues && product.nutritionalValues.map(item => (
+                                    <CustomTableRow key={item.id}>
+                                        <TableCell>{item.name}</TableCell>
+                                        <TableCell align="right">{item.value}</TableCell>
+                                    </CustomTableRow>
+                                ))
+                            }
+                        </TableBody>
+                    </Table>)
+            }
         </CustomPaper>
     );
 };

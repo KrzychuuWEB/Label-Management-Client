@@ -13,11 +13,11 @@ const FlexLabels = styled('div')(() => ({
     }
 }));
 
-const ProductGetLabelsByBusiness = ({getLabelBusiness, labels, activeTab}) => {
-    const getLabelsByBusiness = (labels, business) => {
+const ProductGetLabelsByBusiness = ({getLabelBusiness, labels, activeTab, isLoading}) => {
+    const getLabelsByBusiness = (labelsList, business) => {
         let sortLabels = [];
 
-        labels.map(label => {
+        labelsList.map(label => {
             if (label.business.name === business) {
                 sortLabels.push(label);
             }
@@ -29,7 +29,7 @@ const ProductGetLabelsByBusiness = ({getLabelBusiness, labels, activeTab}) => {
     return (
         <div>
             {
-                getLabelBusiness(labels).map((business, index) => (
+                !isLoading && getLabelBusiness(labels).map((business, index) => (
                     <CustomTabPanel key={index} value={activeTab} index={index}>
                         <FlexLabels>
                             {

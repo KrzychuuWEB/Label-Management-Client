@@ -1,20 +1,20 @@
-import {inMemoryGetProduct} from "@/inMemoryDatabase/products";
-import {inMemoryBusiness} from "@/inMemoryDatabase/business";
+import {productsTable} from "@/inMemoryDatabase/products";
+import {businessTable} from "@/inMemoryDatabase/business";
 
-export const inMemoryGetLabels = [
+export const labelsTable = [
     {
         id: 1,
-        business: inMemoryBusiness[0],
-        productId: inMemoryGetProduct
+        business: businessTable[0],
+        productId: productsTable[0]
     },
     {
         id: 2,
-        business: inMemoryBusiness[0],
-        productId: inMemoryGetProduct
+        business: businessTable[0],
+        productId: productsTable[1]
     },
     {
         id: 3,
-        business: inMemoryBusiness[1],
-        productId: inMemoryGetProduct
+        business: businessTable[1],
+        productId: productsTable[0]
     },
 ];

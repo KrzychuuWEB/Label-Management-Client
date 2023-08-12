@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import CenterBox from "@/components/box/center";
 import {Button, TextField} from "@mui/material";
 import styled from "@emotion/styled";
-import {inMemoryNutritionalNames} from "@/inMemoryDatabase/nutritionalNames";
+import {nutritionalValuesNamesTable} from "@/inMemoryDatabase/nutritionalNames";
 import {useFormik} from "formik";
 import NutritionalTable from "@/app/products/create/components/nutritionalTable";
 import NutritionalDialog from "@/app/products/create/components/nutritionalDialog";
@@ -25,7 +25,7 @@ const ProductCreatePage = () => {
     }
 
     useEffect(() => {
-        const addValueProperty = inMemoryNutritionalNames;
+        const addValueProperty = nutritionalValuesNamesTable;
 
         addValueProperty.map(item => {
             item.value = "";

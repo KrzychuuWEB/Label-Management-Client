@@ -1,4 +1,4 @@
-export const inMemoryBusiness = [
+export const businessTable = [
     {
         id: 1,
         name: "Label Management",

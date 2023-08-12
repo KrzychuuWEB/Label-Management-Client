@@ -1,5 +1,5 @@
 import React from "react";
-import {Divider, Paper, Typography} from "@mui/material";
+import {Divider, Paper, Skeleton, Typography} from "@mui/material";
 import styled from "@emotion/styled";
 
 const CustomPaper = styled(Paper)(() => ({
@@ -14,11 +14,15 @@ const FlexChildren = styled('div')(() => ({
     alignItems: "center",
 }));
 
-const ProductInformations = ({product}) => {
+const ProductInformations = ({product, isLoading}) => {
     return (
         <CustomPaper elevation={2}>
             <Typography variant="h5" fontWeight="bold" color="primary" align="center" sx={{marginBottom: 5}}>
-                {product.name}
+                {
+                    isLoading
+                        ? (<Skeleton variant="text" width={"50%"} sx={{margin: "0 auto"}} height={40}/>)
+                        : product.name
+                }
             </Typography>
 
             <FlexChildren>
@@ -27,7 +31,11 @@ const ProductInformations = ({product}) => {
                 </Typography>
 
                 <Typography variant="body2">
-                    {product.id}
+                    {
+                        isLoading
+                            ? (<Skeleton variant="text" width={100} height={40}/>)
+                            : product.id
+                    }
                 </Typography>
             </FlexChildren>
 
@@ -39,7 +47,11 @@ const ProductInformations = ({product}) => {
                 </Typography>
 
                 <Typography variant="body2">
-                    {product.description}
+                    {
+                        isLoading
+                            ? (<Skeleton variant="text" width={100} height={40}/>)
+                            : product.description
+                    }
                 </Typography>
             </FlexChildren>
 
@@ -51,7 +63,11 @@ const ProductInformations = ({product}) => {
                 </Typography>
 
                 <Typography variant="body2">
-                    {product.composition}
+                    {
+                        isLoading
+                            ? (<Skeleton variant="text" width={100} height={40}/>)
+                            : product.composition
+                    }
                 </Typography>
             </FlexChildren>
 

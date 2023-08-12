@@ -1,14 +1,15 @@
 "use client"
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "next/navigation";
-import {inMemoryGetProduct} from "@/inMemoryDatabase/products";
+import {productsTable} from "@/inMemoryDatabase/products";
 import styled from "@emotion/styled";
-import {inMemoryGetLabels} from "@/inMemoryDatabase/labels";
 import NutritionalValuesTable from "@/app/products/[productId]/components/productNutritionalValuesTable";
 import ProductInformations from "@/app/products/[productId]/components/productInformations";
 import ProductLabelTabBar from "@/app/products/[productId]/components/labels/productLabelTabBar";
 import ProductGetLabelsByBusiness from "@/app/products/[productId]/components/labels/productGetLabelsByBusiness";
+import {Alert, AlertTitle, Skeleton} from "@mui/material";
+import {labelsTable} from "@/inMemoryDatabase/labels";
 
 const Flex = styled('div')(() => ({
     display: "flex",
@@ -18,20 +19,29 @@ const Flex = styled('div')(() => ({
 }));
 
 const GetProductById = () => {
-    // const params = useParams();
-    // const productId = params.productId;
-    const product = inMemoryGetProduct;
-    const labels = inMemoryGetLabels;
+    const params = useParams();
+    const productId = params.productId;
     const [activeTab, setActiveTab] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
+    const [product, setProducts] = useState({});
+    const [labels, setLabels] = useState({});
+
+    useEffect(() => {
+        setTimeout(() => {
+            setProducts(productsTable[productId - 1]);
+            setLabels(labelsTable[1]);
+            setIsLoading(false);
+        }, 5000);
+    }, [productId]);
 
     const changeTab = (event, tab) => {
         setActiveTab(tab);
     }
 
-    const getLabelBusiness = (labels) => {
+    const getLabelBusiness = (labelsList) => {
         let business = [];
 
-        labels.map(label => {
+        labelsList.map(label => {
             if (!business.find(item => item === label.business.name)) {
                 business.push(label.business.name);
             }
@@ -43,23 +53,38 @@ const GetProductById = () => {
     return (
         <div>
             <Flex>
-                <ProductInformations product={product}/>
+                <ProductInformations product={product} isLoading={isLoading}/>
 
-                <NutritionalValuesTable product={product}/>
+                <NutritionalValuesTable product={product} isLoading={isLoading}/>
             </Flex>
 
-            <ProductLabelTabBar
-                activeTab={activeTab}
-                changeTab={changeTab}
-                labels={labels}
-                getLabelBusiness={getLabelBusiness}
-            />
+            {
+                isLoading
+                    ? <Skeleton variant="rectengular" width="100%" height={150} sx={{marginTop: 5}}/>
+                    : labels.length > 0
+                        ? (<div>
+                            <ProductLabelTabBar
+                                activeTab={activeTab}
+                                changeTab={changeTab}
+                                labels={labels}
+                                getLabelBusiness={getLabelBusiness}
+                                isLoading={isLoading}
+                            />
 
-            <ProductGetLabelsByBusiness
-                activeTab={activeTab}
-                getLabelBusiness={getLabelBusiness}
-                labels={labels}
-            />
+                            <ProductGetLabelsByBusiness
+                                activeTab={activeTab}
+                                getLabelBusiness={getLabelBusiness}
+                                labels={labels}
+                                isLoading={isLoading}
+                            />
+                        </div>)
+                        : (
+                            <Alert severity="info" sx={{marginTop: 5}}>
+                                <AlertTitle>Brak danych</AlertTitle>
+                                Wygląda na to że <strong>{product.name}</strong> nie ma jeszcze etykiet :(
+                            </Alert>
+                        )
+            }
         </div>
     );
 };
