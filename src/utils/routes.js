@@ -8,4 +8,8 @@ export const routes = {
         create: "/products/create",
         getBySlug: (slug) => `/products/${slug}`,
     },
+    initials: {
+        create: "/initials/create",
+        getInitials: "/initials",
+    },
 }

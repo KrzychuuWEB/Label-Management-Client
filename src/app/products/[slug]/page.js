@@ -29,7 +29,7 @@ const GetProductById = () => {
     useEffect(() => {
         setTimeout(() => {
             setProducts(productsTable[1]);
-            setLabels(labelsTable[1]);
+            setLabels([labelsTable[0]]);
             setIsLoading(false);
         }, 5000);
     }, [productSlug]);

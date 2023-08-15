@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
-import {Home, Inventory, Label} from "@mui/icons-material";
+import {Home, Inventory, Label, Login, Person, PersonAdd} from "@mui/icons-material";
 import {routes} from "@/utils/routes";
 
 const LeftMenu = ({isOpen, toggleDrawer}) => {
@@ -18,7 +18,7 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                     onKeyDown={toggleDrawer(false)}
                 >
                     <List>
-                        <ListItem disablePadding>
+                        <ListItem>
                             <ListItemButton href={routes.home}>
                                 <ListItemIcon>
                                     <Home/>
@@ -28,7 +28,19 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                             </ListItemButton>
                         </ListItem>
 
-                        <ListItem disablePadding>
+                        <ListItem>
+                            <ListItemButton href={routes.home}>
+                                <ListItemIcon>
+                                    <Login/>
+                                </ListItemIcon
+                                >
+                                <ListItemText primary="Logowanie"/>
+                            </ListItemButton>
+                        </ListItem>
+
+                        <Divider/>
+
+                        <ListItem>
                             <ListItemButton href={routes.products.create}>
                                 <ListItemIcon>
                                     <Inventory/>
@@ -38,7 +50,31 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                             </ListItemButton>
                         </ListItem>
 
-                        <ListItem disablePadding>
+                        <Divider/>
+
+                        <ListItem>
+                            <ListItemButton href={routes.initials.getInitials}>
+                                <ListItemIcon>
+                                    <Person/>
+                                </ListItemIcon
+                                >
+                                <ListItemText primary="Pokaż inicjały"/>
+                            </ListItemButton>
+                        </ListItem>
+
+                        <ListItem>
+                            <ListItemButton href={routes.initials.create}>
+                                <ListItemIcon>
+                                    <PersonAdd/>
+                                </ListItemIcon
+                                >
+                                <ListItemText primary="Dodaj inicjały"/>
+                            </ListItemButton>
+                        </ListItem>
+
+                        <Divider/>
+
+                        <ListItem>
                             <ListItemButton href={routes.labels.create}>
                                 <ListItemIcon>
                                     <Label/>

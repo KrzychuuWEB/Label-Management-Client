@@ -31,8 +31,6 @@ const CenterBox = ({children, width, title}) => {
             }
 
             <Center style={{width: width ? width : 500}} elevation={2}>
-
-
                 {children}
             </Center>
         </Root>
