@@ -1,50 +1,44 @@
+import {nutritionalValuesNamesTable} from "@/inMemoryDatabase/nutritionalNames";
+
 export const nutritionalValuesTable = [
     {
         id: 1,
-        name: "Wartość odżywcza",
-        priority: 1,
+        nutritional_name_id: nutritionalValuesNamesTable[0],
         value: "100g",
     },
     {
         id: 2,
-        name: "Wartość energetyczna",
-        priority: 2,
+        nutritional_name_id: nutritionalValuesNamesTable[1],
         value: "2541 kJ / 613 kcal",
     },
     {
         id: 3,
-        name: "Tłuszcz:",
-        priority: 3,
+        nutritional_name_id: nutritionalValuesNamesTable[2],
         value: "48g",
     },
     {
         id: 4,
-        name: "- kwasy tłuszczowe nasycone",
-        priority: 3.1,
+        nutritional_name_id: nutritionalValuesNamesTable[3],
         value: "6.8g",
     },
     {
         id: 5,
-        name: "Węglowodany:",
-        priority: 4,
+        nutritional_name_id: nutritionalValuesNamesTable[4],
         value: "14g",
     },
     {
         id: 6,
-        name: "- cukry",
-        priority: 4.1,
+        nutritional_name_id: nutritionalValuesNamesTable[5],
         value: "4g",
     },
     {
         id: 7,
-        name: "Białko",
-        priority: 5,
+        nutritional_name_id: nutritionalValuesNamesTable[6],
         value: "27g",
     },
     {
         id: 8,
-        name: "Sól",
-        priority: 6,
+        nutritional_name_id: nutritionalValuesNamesTable[7],
         value: "0,05g",
     },
 ];
