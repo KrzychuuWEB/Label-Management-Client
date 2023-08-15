@@ -32,7 +32,7 @@ const NutritionalTableValues = ({product, isLoading}) => {
                             {
                                product.nutritionalValues && product.nutritionalValues.map(item => (
                                     <CustomTableRow key={item.id}>
-                                        <TableCell>{item.name}</TableCell>
+                                        <TableCell>{item.nutritional_name_id.name}</TableCell>
                                         <TableCell align="right">{item.value}</TableCell>
                                     </CustomTableRow>
                                 ))

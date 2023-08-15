@@ -4,10 +4,10 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "next/navigation";
 import {productsTable} from "@/inMemoryDatabase/products";
 import styled from "@emotion/styled";
-import NutritionalValuesTable from "@/app/products/[productId]/components/productNutritionalValuesTable";
-import ProductInformations from "@/app/products/[productId]/components/productInformations";
-import ProductLabelTabBar from "@/app/products/[productId]/components/labels/productLabelTabBar";
-import ProductGetLabelsByBusiness from "@/app/products/[productId]/components/labels/productGetLabelsByBusiness";
+import NutritionalValuesTable from "@/app/products/[slug]/components/productNutritionalValuesTable";
+import ProductInformations from "@/app/products/[slug]/components/productInformations";
+import ProductLabelTabBar from "@/app/products/[slug]/components/labels/productLabelTabBar";
+import ProductGetLabelsByBusiness from "@/app/products/[slug]/components/labels/productGetLabelsByBusiness";
 import {Alert, AlertTitle, Skeleton} from "@mui/material";
 import {labelsTable} from "@/inMemoryDatabase/labels";
 
@@ -20,7 +20,7 @@ const Flex = styled('div')(() => ({
 
 const GetProductById = () => {
     const params = useParams();
-    const productId = params.productId;
+    const productSlug = params.slug;
     const [activeTab, setActiveTab] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [product, setProducts] = useState({});
@@ -28,11 +28,11 @@ const GetProductById = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            setProducts(productsTable[productId - 1]);
+            setProducts(productsTable[1]);
             setLabels(labelsTable[1]);
             setIsLoading(false);
         }, 5000);
-    }, [productId]);
+    }, [productSlug]);
 
     const changeTab = (event, tab) => {
         setActiveTab(tab);

@@ -2,7 +2,8 @@
 
 import React, {useEffect, useState} from "react";
 import {
-    Alert, AlertTitle,
+    Alert,
+    AlertTitle,
     Divider,
     Icon,
     List,
@@ -83,7 +84,7 @@ const HomePage = () => {
                                             getProductsByFirstLetterAndSortAlphabetical(products, letter).map((product, index) => (
                                                 <div key={product.id}>
                                                     <ListItem disablePadding>
-                                                        <ListItemButton href={routes.products.getById(product.id)}>
+                                                        <ListItemButton href={routes.products.getBySlug(product.slug)}>
                                                             <ListItemText primary={product.name}/>
                                                             <Icon align="right" color="primary">
                                                                 <Visibility/>
@@ -103,7 +104,7 @@ const HomePage = () => {
                                 </Paper>
                             </ListBox>
                         ))
-                        : <Alert severity="info" >
+                        : <Alert severity="info">
                             <AlertTitle>Brak danych</AlertTitle>
                             Brak produktów do wyświetlenia :(
                         </Alert>

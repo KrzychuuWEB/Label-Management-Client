@@ -71,6 +71,22 @@ const ProductInformations = ({product, isLoading}) => {
                 </Typography>
             </FlexChildren>
 
+            <Divider/>
+
+            <FlexChildren>
+                <Typography variant="body2" fontWeight="bold" sx={{marginRight: 1}}>
+                    Slug:
+                </Typography>
+
+                <Typography variant="body2">
+                    {
+                        isLoading
+                            ? (<Skeleton variant="text" width={100} height={40}/>)
+                            : product.slug
+                    }
+                </Typography>
+            </FlexChildren>
+
         </CustomPaper>
     );
 };
