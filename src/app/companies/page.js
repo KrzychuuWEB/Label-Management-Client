@@ -1,7 +1,17 @@
 "use client"
 
 import React, {useEffect, useState} from "react";
-import {Alert, AlertTitle, Divider, IconButton, List, ListItem, ListItemText, Skeleton} from "@mui/material";
+import {
+    Alert,
+    AlertTitle,
+    Divider,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    Skeleton,
+    Typography
+} from "@mui/material";
 import {companiesTable} from "@/inMemoryDatabase/companies";
 import {Delete, Edit} from "@mui/icons-material";
 import CompaniesEditPage from "@/app/companies/edit";
@@ -30,6 +40,10 @@ const GetCompaniesPage = () => {
 
     return (
         <div>
+            <Typography align="center" variant="h3" color="primary" sx={{marginBottom: 5}}>
+                Firmy
+            </Typography>
+
             {
                 isLoading
                     ? (

@@ -1,7 +1,17 @@
 "use client"
 
 import React, {useEffect, useState} from "react";
-import {Alert, AlertTitle, Divider, IconButton, List, ListItem, ListItemText, Skeleton} from "@mui/material";
+import {
+    Alert,
+    AlertTitle,
+    Divider,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    Skeleton,
+    Typography
+} from "@mui/material";
 import {initialsTable} from "@/inMemoryDatabase/initials";
 import {Delete, Edit} from "@mui/icons-material";
 import InitialEditDialog from "@/app/initials/edit";
@@ -30,6 +40,10 @@ const GetInitialsPage = () => {
 
     return (
         <div>
+            <Typography align="center" variant="h3" color="primary" sx={{marginBottom: 5}}>
+                Inicjały
+            </Typography>
+
             {
                 isLoading
                     ? (<div>
