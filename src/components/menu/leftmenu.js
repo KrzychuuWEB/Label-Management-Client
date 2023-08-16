@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
-import {Home, Inventory, Label, Login, Person, PersonAdd} from "@mui/icons-material";
+import {AddBusiness, Business, Home, Inventory, Label, Login, Person, PersonAdd} from "@mui/icons-material";
 import {routes} from "@/utils/routes";
 
 const LeftMenu = ({isOpen, toggleDrawer}) => {
@@ -69,6 +69,28 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                                 </ListItemIcon
                                 >
                                 <ListItemText primary="Dodaj inicjały"/>
+                            </ListItemButton>
+                        </ListItem>
+
+                        <Divider/>
+
+                        <ListItem>
+                            <ListItemButton href={routes.companies.getCompanies}>
+                                <ListItemIcon>
+                                    <Business/>
+                                </ListItemIcon
+                                >
+                                <ListItemText primary="Pokaż firmy"/>
+                            </ListItemButton>
+                        </ListItem>
+
+                        <ListItem>
+                            <ListItemButton href={routes.companies.create}>
+                                <ListItemIcon>
+                                    <AddBusiness/>
+                                </ListItemIcon
+                                >
+                                <ListItemText primary="Dodaj firme"/>
                             </ListItemButton>
                         </ListItem>
 

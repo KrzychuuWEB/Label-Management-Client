@@ -12,4 +12,8 @@ export const routes = {
         create: "/initials/create",
         getInitials: "/initials",
     },
+    companies: {
+        create: "/companies/create",
+        getCompanies: "/companies",
+    },
 }

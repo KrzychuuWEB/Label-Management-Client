@@ -1,6 +1,6 @@
 import {usersTable} from "@/inMemoryDatabase/users";
 
-export const businessTable = [
+export const companiesTable = [
     {
         id: 1,
         name: "Label Management",
