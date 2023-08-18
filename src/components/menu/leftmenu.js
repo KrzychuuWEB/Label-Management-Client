@@ -1,6 +1,17 @@
 import React from "react";
 import {Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
-import {AddBusiness, Business, Home, Inventory, Label, Login, Person, PersonAdd} from "@mui/icons-material";
+import {
+    AddBusiness,
+    Business,
+    Home,
+    Inventory,
+    Label,
+    Login,
+    Person,
+    PersonAdd,
+    TableRows,
+    TableView
+} from "@mui/icons-material";
 import {routes} from "@/utils/routes";
 
 const LeftMenu = ({isOpen, toggleDrawer}) => {
@@ -12,7 +23,7 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                 onClose={toggleDrawer(false)}
             >
                 <Box
-                    sx={{width: 250}}
+                    sx={{width: 300}}
                     role="presentation"
                     onClick={toggleDrawer(false)}
                     onKeyDown={toggleDrawer(false)}
@@ -103,6 +114,28 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                                 </ListItemIcon
                                 >
                                 <ListItemText primary="Stwórz etykietę"/>
+                            </ListItemButton>
+                        </ListItem>
+
+                        <Divider/>
+
+                        <ListItem>
+                            <ListItemButton href={routes.admin.nutritionalValues.get}>
+                                <ListItemIcon>
+                                    <TableView/>
+                                </ListItemIcon
+                                >
+                                <ListItemText primary="Pokaż wartości odżywcze"/>
+                            </ListItemButton>
+                        </ListItem>
+
+                        <ListItem>
+                            <ListItemButton href={routes.admin.nutritionalValues.create}>
+                                <ListItemIcon>
+                                    <TableRows/>
+                                </ListItemIcon
+                                >
+                                <ListItemText primary="Dodaj wartości odżywcze"/>
                             </ListItemButton>
                         </ListItem>
 

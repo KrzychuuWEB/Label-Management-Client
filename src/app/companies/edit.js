@@ -25,18 +25,8 @@ const CompaniesEditPage = ({open, handleClose, company}) => {
                     formik={formik}
                 >
                     <DialogActions>
-                        <Button
-                            onClick={() => handleClose(false)}
-                        >
-                            Anuluj
-                        </Button>
-
-                        <Button
-                            type="submit"
-                            variant="contained"
-                        >
-                            Edytuj
-                        </Button>
+                        <Button onClick={() => handleClose(false)}>Anuluj</Button>
+                        <Button type="submit" variant="contained">Edytuj</Button>
                     </DialogActions>
                 </CompaniesForm>
             </CustomDialog>

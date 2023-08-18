@@ -1,5 +1,10 @@
 import React from "react";
 import {Dialog, DialogContent, DialogTitle} from "@mui/material";
+import styled from "@emotion/styled";
+
+const CustomDiv = styled('div')(() => ({
+    marginTop: 15,
+}));
 
 const CustomDialog = ({title, dialogActions, children, open, handleClose}) => {
     return (
@@ -11,7 +16,9 @@ const CustomDialog = ({title, dialogActions, children, open, handleClose}) => {
                 {title}
             </DialogTitle>
             <DialogContent>
-                {children}
+                <CustomDiv>
+                    {children}
+                </CustomDiv>
 
                 {dialogActions}
             </DialogContent>

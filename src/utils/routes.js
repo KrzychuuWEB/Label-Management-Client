@@ -16,4 +16,10 @@ export const routes = {
         create: "/companies/create",
         getCompanies: "/companies",
     },
+    admin: {
+        nutritionalValues: {
+            create: "/admin/nutritionalValues/create",
+            get: "/admin/nutritionalValues",
+        }
+    }
 }
