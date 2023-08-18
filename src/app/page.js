@@ -31,7 +31,7 @@ const HomePage = () => {
         setTimeout(() => {
             setProducts(productsTable);
             setIsLoading(false);
-        }, 5000);
+        }, 2500);
     }, []);
 
     const getFirstLettersProductsAndSortAlphabetical = (productsList) => {

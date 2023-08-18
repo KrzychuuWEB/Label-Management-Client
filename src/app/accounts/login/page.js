@@ -2,9 +2,9 @@
 
 import React from "react";
 import {Button} from "@mui/material";
-import LoginForm from "@/app/login/form";
+import LoginForm from "@/app/accounts/login/form";
 import {useFormik} from "formik";
-import {loginValidationSchema} from "@/app/login/formValid";
+import {loginValidationSchema} from "@/app/accounts/login/formValid";
 import BoxWithLogo from "@/components/box/withLogo";
 
 const LoginPage = () => {

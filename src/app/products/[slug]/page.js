@@ -31,7 +31,7 @@ const GetProductById = () => {
             setProducts(productsTable[1]);
             setLabels([labelsTable[0]]);
             setIsLoading(false);
-        }, 5000);
+        }, 2500);
     }, [productSlug]);
 
     const changeTab = (event, tab) => {

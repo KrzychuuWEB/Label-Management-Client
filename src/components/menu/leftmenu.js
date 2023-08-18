@@ -6,7 +6,6 @@ import {
     Home,
     Inventory,
     Label,
-    Login,
     Person,
     PersonAdd,
     TableRows,
@@ -36,16 +35,6 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                                 </ListItemIcon
                                 >
                                 <ListItemText primary="Strona główna"/>
-                            </ListItemButton>
-                        </ListItem>
-
-                        <ListItem>
-                            <ListItemButton href={routes.home}>
-                                <ListItemIcon>
-                                    <Login/>
-                                </ListItemIcon
-                                >
-                                <ListItemText primary="Logowanie"/>
                             </ListItemButton>
                         </ListItem>
 
