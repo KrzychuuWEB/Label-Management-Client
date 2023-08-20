@@ -7,7 +7,7 @@ import {useFormik} from "formik";
 import {loginValidationSchema} from "@/app/accounts/login/formValid";
 import BoxWithLogo from "@/components/box/withLogo";
 
-const LoginPage = () => {
+const AccountLoginPage = () => {
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -38,4 +38,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default AccountLoginPage;

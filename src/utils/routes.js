@@ -3,6 +3,7 @@ export const routes = {
     accounts: {
         login: "/accounts/login",
         register: "/accounts/register",
+        settings: "/accounts/settings",
     },
     labels: {
         create: "/labels/create",

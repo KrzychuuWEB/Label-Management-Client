@@ -24,10 +24,18 @@ const ActionButton = styled('div')(() => ({
 }));
 
 const AccountRegisterPage = () => {
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState({
+        password: false,
+        repeatPassword: false
+    });
+
+    const changeShowPassword = (name) => {
+        setShowPassword(prevState => ({...prevState, [name]: !prevState[name]}))
+    };
 
     const formik = useFormik({
         initialValues: {
+            username: "",
             email: "",
             password: "",
             repeatPassword: "",
@@ -38,14 +46,23 @@ const AccountRegisterPage = () => {
         }
     });
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
     return (
         <div>
             <BoxWithLogo
                 title="Zarejestruj się"
             >
                 <form autoComplete="off" onSubmit={formik.handleSubmit}>
+                    <TextField
+                        sx={{marginBottom: 3}}
+                        fullWidth
+                        name="username"
+                        label="Nazwa użytkownika / firmy"
+                        onChange={formik.handleChange}
+                        value={formik.values.username}
+                        error={formik.touched.username && Boolean(formik.errors.username)}
+                        helperText={formik.touched.username && (formik.errors.username)}
+                    />
+
                     <TextField
                         sx={{marginBottom: 3}}
                         fullWidth
@@ -62,7 +79,7 @@ const AccountRegisterPage = () => {
                         <OutlinedInput
                             fullWidth
                             name="password"
-                            type={showPassword ? 'text' : 'password'}
+                            type={showPassword.password ? 'text' : 'password'}
                             onChange={formik.handleChange}
                             value={formik.values.password}
                             error={formik.touched.password && Boolean(formik.errors.password)}
@@ -70,10 +87,10 @@ const AccountRegisterPage = () => {
                                 <InputAdornment position="end">
                                     <IconButton
                                         aria-label="Pokaż hasło"
-                                        onClick={handleClickShowPassword}
+                                        onClick={() => changeShowPassword("password")}
                                         edge="end"
                                     >
-                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                        {showPassword.password ? <VisibilityOff/> : <Visibility/>}
                                     </IconButton>
                                 </InputAdornment>
                             }
@@ -84,17 +101,32 @@ const AccountRegisterPage = () => {
                         </FormHelperText>
                     </FormControl>
 
-                    <TextField
-                        sx={{marginBottom: 3}}
-                        type={showPassword ? 'text' : 'password'}
-                        fullWidth
-                        name="repeatPassword"
-                        label="Powtórz hasło"
-                        onChange={formik.handleChange}
-                        value={formik.values.repeatPassword}
-                        error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
-                        helperText={formik.touched.repeatPassword && (formik.errors.repeatPassword)}
-                    />
+                    <FormControl fullWidth sx={{marginBottom: 3}}>
+                        <InputLabel htmlFor="password">Powtórz hasło</InputLabel>
+                        <OutlinedInput
+                            fullWidth
+                            name="repeatPassword"
+                            type={showPassword.repeatPassword ? 'text' : 'password'}
+                            onChange={formik.handleChange}
+                            value={formik.values.repeatPassword}
+                            error={formik.touched.repeatPassword && Boolean(formik.errors.repeatPassword)}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="Pokaż hasło"
+                                        onClick={() => changeShowPassword("repeatPassword")}
+                                        edge="end"
+                                    >
+                                        {showPassword.repeatPassword ? <VisibilityOff/> : <Visibility/>}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            label="Powtórz hasło"
+                        />
+                        <FormHelperText sx={{color: "red"}} color="error">
+                            {formik.touched.repeatPassword && (formik.errors.repeatPassword)}
+                        </FormHelperText>
+                    </FormControl>
 
                     <ActionButton>
                         <Button

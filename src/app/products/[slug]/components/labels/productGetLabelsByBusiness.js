@@ -1,5 +1,5 @@
 import React from "react";
-import CustomTabPanel from "@/app/products/[slug]/components/labels/CustomTabPanel";
+import CustomTabPanel from "@/components/tab/CustomTabPanel";
 import Label from "@/components/label/label";
 import styled from "@emotion/styled";
 
