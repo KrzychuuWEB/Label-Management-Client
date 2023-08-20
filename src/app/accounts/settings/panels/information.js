@@ -20,9 +20,10 @@ const AccountSettingsInformationPanel = ({user, isLoading}) => {
 
     const formik = useFormik({
         initialValues: {
-            username: user.username,
-            email: user.email,
+            username: user.username || "",
+            email: user.email || "",
         },
+        enableReinitialize: true,
         validationSchema: informationValidationSchema,
         onSubmit: values => {
             console.log(values);
