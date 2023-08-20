@@ -36,6 +36,7 @@ const AccountSettingsInformationPanel = ({user, isLoading}) => {
                 isLoading
                     ? <Skeleton height={50} sx={{marginBottom: 3}} width="100%" variant="rectangular"/>
                     : <TextField
+                        disabled={!editMode}
                         fullWidth
                         sx={{marginBottom: 3}}
                         name="username"
@@ -51,6 +52,7 @@ const AccountSettingsInformationPanel = ({user, isLoading}) => {
                 isLoading
                     ? <Skeleton height={50} sx={{marginBottom: 3}} width="100%" variant="rectangular"/>
                     : <TextField
+                        disabled={!editMode}
                         fullWidth
                         sx={{marginBottom: 3}}
                         name="email"
