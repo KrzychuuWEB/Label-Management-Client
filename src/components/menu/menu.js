@@ -7,6 +7,13 @@ import Link from "next/link";
 import LeftMenu from "@/components/menu/leftmenu";
 import {routes} from "@/utils/routes";
 import {APP_NAME} from "@/utils/constants";
+import styled from "@emotion/styled";
+
+const ActionButtons = styled('div')(() => ({
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+}));
 
 const MenuBar = () => {
     const [toggleMenu, setToggleMenu] = React.useState({open: false});
@@ -57,14 +64,24 @@ const MenuBar = () => {
                         </div>
                     </Box>
 
-                    <div>
+                    <ActionButtons>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            href={routes.accounts.register}
+                        >
+                            Dołącz już dziś
+                        </Button>
+                        <Typography sx={{marginLeft: 2, marginRight: 1}} variant="body2" color="primary">
+                            lub
+                        </Typography>
                         <Button
                             color="primary"
                             href={routes.accounts.login}
                         >
                             Zaloguj się
                         </Button>
-                    </div>
+                    </ActionButtons>
                 </Toolbar>
             </AppBar>
 
