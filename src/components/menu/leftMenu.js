@@ -6,7 +6,7 @@ import {
     Home,
     Inventory,
     Label,
-    ManageAccounts,
+    ManageAccounts, People,
     Person,
     PersonAdd,
     TableRows,
@@ -46,6 +46,16 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                                 </ListItemIcon
                                 >
                                 <ListItemText primary="Ustawienia konta"/>
+                            </ListItemButton>
+                        </ListItem>
+
+                        <ListItem>
+                            <ListItemButton href={routes.admin.accounts.get}>
+                                <ListItemIcon>
+                                    <People/>
+                                </ListItemIcon
+                                >
+                                <ListItemText primary="Lista użytkowników"/>
                             </ListItemButton>
                         </ListItem>
 

@@ -24,6 +24,9 @@ export const routes = {
         nutritionalValues: {
             create: "/admin/nutritionalValues/create",
             get: "/admin/nutritionalValues",
+        },
+        accounts: {
+            get: "/admin/accounts"
         }
     }
 }

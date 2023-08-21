@@ -32,15 +32,22 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 const AdminGetNutritionalValuesPage = () => {
     const [nutritionalValues, setNutritionalValues] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [editDialog, setEditDialog] = useState(false);
-    const [deleteDialog, setDeleteDialog] = useState(false);
+    const [dialog, setDialog] = useState({});
 
-    const toggleEditDialog = (status) => {
-        setEditDialog(status)
+    const openDialog = (type, value) => {
+        setDialog({
+            open: true,
+            type: type,
+            value: value,
+        });
     };
 
-    const toggleDeleteDialog = (status) => {
-        setDeleteDialog(status)
+    const closeDialog = () => {
+        setDialog({
+            open: false,
+            value: false,
+            type: false,
+        });
     };
 
     useEffect(() => {
@@ -52,7 +59,7 @@ const AdminGetNutritionalValuesPage = () => {
 
     return (
         <div>
-            <Typography align="center" variant="h3" color="primary" sx={{marginBottom: 5}}>
+            <Typography align="center" variant="h4" color="primary" sx={{marginBottom: 5}}>
                 Wartości odżywcze
             </Typography>
 
@@ -87,30 +94,39 @@ const AdminGetNutritionalValuesPage = () => {
                                                         {nutritionalValue.priority}
                                                     </TableCell>
                                                     <TableCell align="right" width="20%">
-                                                        <IconButton onClick={() => toggleDeleteDialog(true)} color="error">
-                                                            <Delete/>
+                                                        <IconButton onClick={() => openDialog("delete", nutritionalValue)}>
+                                                            <Delete color="error"/>
                                                         </IconButton>
 
-                                                        <IconButton onClick={() => toggleEditDialog(true)} color="primary">
-                                                            <Edit/>
+                                                        <IconButton onClick={() => openDialog("edit", nutritionalValue)}>
+                                                            <Edit color="primary"/>
                                                         </IconButton>
-
-                                                        <AdminNutritionalValuesDeleteDialog
-                                                            open={deleteDialog}
-                                                            handleClose={toggleDeleteDialog}
-                                                            nutritionalValue={nutritionalValue}
-                                                        />
-                                                        <AdminNutritionalValuesEditDialog
-                                                            open={editDialog}
-                                                            handleClose={toggleEditDialog}
-                                                            nutritionalValue={nutritionalValue}
-                                                        />
                                                     </TableCell>
                                                 </StyledTableRow>
                                             ))
                                         }
                                     </TableBody>
                                 </Table>
+
+                                {
+                                    dialog.type === "delete" && (
+                                        <AdminNutritionalValuesDeleteDialog
+                                            open={dialog.open}
+                                            handleClose={closeDialog}
+                                            nutritionalValue={dialog.value}
+                                        />
+                                    )
+                                }
+
+                                {
+                                    dialog.type === "edit" && (
+                                        <AdminNutritionalValuesEditDialog
+                                            open={dialog.open}
+                                            handleClose={closeDialog}
+                                            nutritionalValue={dialog.value}
+                                        />
+                                    )
+                                }
                             </Paper>
                         )
                         : (
