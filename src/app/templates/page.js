@@ -11,14 +11,13 @@ import {
     TableBody,
     TableCell,
     TableHead,
-    TableRow,
-    Tooltip,
-    Typography
+    TableRow
 } from "@mui/material";
-import {usersTable} from "@/inMemoryDatabase/users";
+import {labelTemplatesTable} from "@/inMemoryDatabase/labelTemplates";
 import styled from "@emotion/styled";
-import {LockClock, LockOpen} from "@mui/icons-material";
-import AdminAccountLockDialog from "@/app/admin/accounts/lockDialog";
+import {Delete, Edit} from "@mui/icons-material";
+import LabelTemplateDeleteDialog from "@/app/templates/delete";
+import LabelTemplateEditDialog from "@/app/templates/edit";
 
 const StyledTableRow = styled(TableRow)(({theme}) => ({
     '&:nth-of-type(odd)': {
@@ -29,17 +28,10 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
     },
 }));
 
-const AdminGetAccountsPage = () => {
-    const [users, setUsers] = useState([]);
-    const [dialog, setDialog] = useState({});
+const GetLabelTemplatesPage = () => {
+    const [labelTemplates, setLabelTemplates] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        setTimeout(() => {
-            setUsers(usersTable);
-            setIsLoading(false);
-        }, 2500);
-    }, []);
+    const [dialog, setDialog] = useState({});
 
     const openDialog = (type, value) => {
         setDialog({
@@ -47,31 +39,32 @@ const AdminGetAccountsPage = () => {
             type: type,
             value: value,
         });
-
     };
+
     const closeDialog = () => {
         setDialog({
             open: false,
             value: false,
             type: false,
         });
-
     };
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLabelTemplates(labelTemplatesTable);
+            setIsLoading(false);
+        }, 2500);
+    }, []);
 
     return (
         <div>
-            <Typography align="center" color="primary" variant="h4" sx={{marginTop: 2, marginBottom: 5}}>
-                Lista użytkowników
-            </Typography>
-
-            <Paper>
+            <Paper elevation={2}>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Nazwa użytkownika</TableCell>
-                            <TableCell>Email</TableCell>
-                            <TableCell>Data rejestracji</TableCell>
-                            <TableCell>Data ostatniego logowania</TableCell>
+                            <TableCell>Nazwa szablonu</TableCell>
+                            <TableCell>Szerokość szablonu</TableCell>
+                            <TableCell>Wysokość szablonu</TableCell>
                             <TableCell>Akcje</TableCell>
                         </TableRow>
                     </TableHead>
@@ -92,38 +85,36 @@ const AdminGetAccountsPage = () => {
                                         <TableCell>
                                             <Skeleton variant="text" width="100%" height={30}/>
                                         </TableCell>
-                                        <TableCell>
-                                            <Skeleton variant="text" width="100%" height={30}/>
-                                        </TableCell>
                                     </StyledTableRow>
                                 ))
-                                : users.length > 0
-                                    ? users.map(user => (
-                                        <StyledTableRow key={user.id}>
-                                            <TableCell>{user.username}</TableCell>
-                                            <TableCell>{user.email}</TableCell>
-                                            <TableCell>20.08.2023 10:57:21</TableCell>
-                                            <TableCell>21.08.2023 08:32:43</TableCell>
+                                : labelTemplates.length > 0
+                                    ? labelTemplates.map(template => (
+                                        <StyledTableRow key={template.id}>
                                             <TableCell>
-                                                <Tooltip title="Zablokuj użytkownika">
-                                                    <IconButton onClick={() => openDialog("accountLock", user)}>
-                                                        <LockClock color="primary"/>
-                                                    </IconButton>
-                                                </Tooltip>
+                                                {template.name}
+                                            </TableCell>
+                                            <TableCell>
+                                                {template.width} px
+                                            </TableCell>
+                                            <TableCell>
+                                                {template.height} px
+                                            </TableCell>
+                                            <TableCell>
+                                                <IconButton onClick={() => openDialog("delete", template)}>
+                                                    <Delete color="error"/>
+                                                </IconButton>
 
-                                                <Tooltip title="Odblokuj użytkownika">
-                                                    <IconButton>
-                                                        <LockOpen color="primary"/>
-                                                    </IconButton>
-                                                </Tooltip>
+                                                <IconButton onClick={() => openDialog("edit", template)}>
+                                                    <Edit color="primary"/>
+                                                </IconButton>
                                             </TableCell>
                                         </StyledTableRow>
                                     ))
                                     : <TableRow>
-                                        <TableCell colSpan={5}>
+                                        <TableCell colSpan={4}>
                                             <Alert severity="info">
                                                 <AlertTitle>Brak danych</AlertTitle>
-                                                Brak danych do wyświetlenia :(
+                                                Brak danych do wyświetlenie :(
                                             </Alert>
                                         </TableCell>
                                     </TableRow>
@@ -132,11 +123,21 @@ const AdminGetAccountsPage = () => {
                 </Table>
 
                 {
-                    dialog.type === "accountLock" && (
-                        <AdminAccountLockDialog
-                            account={dialog.value}
+                    dialog.type === "delete" && (
+                        <LabelTemplateDeleteDialog
                             open={dialog.open}
                             handleClose={closeDialog}
+                            template={dialog.value}
+                        />
+                    )
+                }
+
+                {
+                    dialog.type === "edit" && (
+                        <LabelTemplateEditDialog
+                            open={dialog.open}
+                            handleClose={closeDialog}
+                            template={dialog.value}
                         />
                     )
                 }
@@ -145,4 +146,4 @@ const AdminGetAccountsPage = () => {
     );
 };
 
-export default AdminGetAccountsPage;
+export default GetLabelTemplatesPage;

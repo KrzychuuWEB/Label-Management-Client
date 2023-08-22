@@ -9,7 +9,7 @@ export const labelTemplatesTable = [
         user_id: usersTable[0],
     },
     {
-        id: 1,
+        id: 2,
         name: "Prostokąt",
         width: 350,
         height: 250,

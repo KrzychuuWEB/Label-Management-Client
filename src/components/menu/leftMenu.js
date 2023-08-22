@@ -10,7 +10,7 @@ import {
     Person,
     PersonAdd,
     TableRows,
-    TableView
+    TableView, ViewInAr
 } from "@mui/icons-material";
 import {routes} from "@/utils/routes";
 
@@ -116,6 +116,16 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                         </ListItem>
 
                         <Divider/>
+
+                        <ListItem>
+                            <ListItemButton href={routes.templates.getAll}>
+                                <ListItemIcon>
+                                    <ViewInAr/>
+                                </ListItemIcon
+                                >
+                                <ListItemText primary="Pokaż szablony"/>
+                            </ListItemButton>
+                        </ListItem>
 
                         <ListItem>
                             <ListItemButton href={routes.labels.create}>

@@ -5,6 +5,9 @@ export const routes = {
         register: "/accounts/register",
         settings: "/accounts/settings",
     },
+    templates: {
+        getAll: "/templates"
+    },
     labels: {
         create: "/labels/create",
     },
