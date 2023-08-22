@@ -1,16 +1,19 @@
 import React from "react";
 import {Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import {
+    Add,
     AddBusiness,
     Business,
     Home,
     Inventory,
     Label,
-    ManageAccounts, People,
+    ManageAccounts,
+    People,
     Person,
     PersonAdd,
     TableRows,
-    TableView, ViewInAr
+    TableView,
+    ViewInAr
 } from "@mui/icons-material";
 import {routes} from "@/utils/routes";
 
@@ -124,6 +127,15 @@ const LeftMenu = ({isOpen, toggleDrawer}) => {
                                 </ListItemIcon
                                 >
                                 <ListItemText primary="Pokaż szablony"/>
+                            </ListItemButton>
+                        </ListItem>
+
+                        <ListItem>
+                            <ListItemButton href={routes.templates.create}>
+                                <ListItemIcon>
+                                    <Add/>
+                                </ListItemIcon>
+                                <ListItemText primary="Stwórz szablon"/>
                             </ListItemButton>
                         </ListItem>
 

@@ -6,7 +6,8 @@ export const routes = {
         settings: "/accounts/settings",
     },
     templates: {
-        getAll: "/templates"
+        create: "/templates/create",
+        getAll: "/templates",
     },
     labels: {
         create: "/labels/create",
