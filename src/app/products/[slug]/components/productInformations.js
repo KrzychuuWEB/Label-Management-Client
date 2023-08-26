@@ -27,22 +27,6 @@ const ProductInformations = ({product, isLoading}) => {
 
             <FlexChildren>
                 <Typography variant="body2" fontWeight="bold" sx={{marginRight: 1}}>
-                    Id:
-                </Typography>
-
-                <Typography variant="body2">
-                    {
-                        isLoading
-                            ? (<Skeleton variant="text" width={100} height={40}/>)
-                            : product.id
-                    }
-                </Typography>
-            </FlexChildren>
-
-            <Divider/>
-
-            <FlexChildren>
-                <Typography variant="body2" fontWeight="bold" sx={{marginRight: 1}}>
                     Opis:
                 </Typography>
 
@@ -86,7 +70,6 @@ const ProductInformations = ({product, isLoading}) => {
                     }
                 </Typography>
             </FlexChildren>
-
         </CustomPaper>
     );
 };

@@ -8,8 +8,23 @@ import NutritionalValuesTable from "@/app/products/[slug]/components/productNutr
 import ProductInformations from "@/app/products/[slug]/components/productInformations";
 import ProductLabelTabBar from "@/app/products/[slug]/components/labels/productLabelTabBar";
 import ProductGetLabelsByBusiness from "@/app/products/[slug]/components/labels/productGetLabelsByBusiness";
-import {Alert, AlertTitle, Skeleton} from "@mui/material";
+import {Alert, AlertTitle, Skeleton, SpeedDial, SpeedDialAction, SpeedDialIcon} from "@mui/material";
 import {labelsTable} from "@/inMemoryDatabase/labels";
+import {labelDetailsTable} from "@/inMemoryDatabase/labelDetails";
+import {Delete, Edit} from "@mui/icons-material";
+import ProductDeleteDialog from "@/app/products/[slug]/delete";
+import ProductEditDialog from "@/app/products/[slug]/edit";
+import {
+    addValueAndCheckedFieldToNutritionalValueNames,
+    getSortedNutritionalValuesByPriority
+} from "@/utils/nutritionalValues/nutritionalValuesFunctions";
+import {nutritionalValuesNamesTable} from "@/inMemoryDatabase/nutritionalNames";
+
+const CustomSpeedDial = styled(SpeedDial)(() => ({
+    position: "fixed",
+    right: 35,
+    bottom: 35,
+}));
 
 const Flex = styled('div')(() => ({
     display: "flex",
@@ -25,14 +40,35 @@ const GetProductById = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [product, setProducts] = useState({});
     const [labels, setLabels] = useState({});
+    const [details, setDetails] = useState({});
+    const [dialog, setDialog] = useState({open: false, type: ""});
+    const [nutritionalValues, setNutritionalValues] = useState([]);
 
     useEffect(() => {
         setTimeout(() => {
+            const addValuesAndChecked = addValueAndCheckedFieldToNutritionalValueNames(nutritionalValuesNamesTable)
+            setNutritionalValues(getSortedNutritionalValuesByPriority(addValuesAndChecked))
             setProducts(productsTable[1]);
             setLabels([labelsTable[0]]);
+            setDetails(labelDetailsTable);
             setIsLoading(false);
         }, 2500);
     }, [productSlug]);
+
+    const initialValuesForEditForm = () => {
+        const stateUpdate = [...nutritionalValues];
+
+        product.nutritionalValues.map(item => {
+            stateUpdate.map(value => {
+                if (item.nutritional_name_id.priority === value.priority) {
+                    value.value = item.value;
+                    value.checked = true;
+                }
+            })
+        });
+
+        setNutritionalValues(stateUpdate);
+    }
 
     const changeTab = (event, tab) => {
         setActiveTab(tab);
@@ -50,6 +86,17 @@ const GetProductById = () => {
         return business;
     };
 
+    const openDialog = (type) => {
+        setDialog({
+            open: true,
+            type: type,
+        });
+    };
+
+    const closeDialog = () => {
+        setDialog({open: false, type: ""});
+    };
+
     return (
         <div>
             <Flex>
@@ -57,7 +104,6 @@ const GetProductById = () => {
 
                 <NutritionalValuesTable product={product} isLoading={isLoading}/>
             </Flex>
-
             {
                 isLoading
                     ? <Skeleton variant="rectengular" width="100%" height={150} sx={{marginTop: 5}}/>
@@ -76,6 +122,7 @@ const GetProductById = () => {
                                 getLabelBusiness={getLabelBusiness}
                                 labels={labels}
                                 isLoading={isLoading}
+                                details={details}
                             />
                         </div>)
                         : (
@@ -84,6 +131,47 @@ const GetProductById = () => {
                                 Wygląda na to że produkt <strong>{product.name}</strong> nie ma jeszcze etykiet :(
                             </Alert>
                         )
+            }
+
+            {
+                dialog.type === "delete" && <ProductDeleteDialog
+                    open={dialog.open}
+                    handleClose={closeDialog}
+                    product={product}
+                />
+            }
+
+            {
+                dialog.type === "edit" && <ProductEditDialog
+                    open={dialog.open}
+                    handleClose={closeDialog}
+                    product={product}
+                    nutritionalValues={nutritionalValues}
+                    setNutritionalValues={setNutritionalValues}
+                />
+            }
+
+            {
+                !isLoading && (
+                    <CustomSpeedDial
+                        icon={<SpeedDialIcon/>}
+                        ariaLabel="SpeedDial produktu"
+                    >
+                        <SpeedDialAction
+                            icon={<Edit/>}
+                            tooltipTitle="Edytuj"
+                            onClick={() => {
+                                openDialog("edit");
+                                initialValuesForEditForm();
+                            }}
+                        />
+                        <SpeedDialAction
+                            icon={<Delete color="error"/>}
+                            tooltipTitle="Usuń"
+                            onClick={() => openDialog("delete")}
+                        />
+                    </CustomSpeedDial>
+                )
             }
         </div>
     );

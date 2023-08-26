@@ -6,13 +6,13 @@ export const nutritionalValuesNamesTable = [
     },
     {
         id: 2,
-        name: "Wartość energetyczna",
-        priority: 2,
+        name: "Tłuszcz:",
+        priority: 3,
     },
     {
         id: 3,
-        name: "Tłuszcz:",
-        priority: 3,
+        name: "Węglowodany:",
+        priority: 4,
     },
     {
         id: 4,
@@ -21,8 +21,8 @@ export const nutritionalValuesNamesTable = [
     },
     {
         id: 5,
-        name: "Węglowodany:",
-        priority: 4,
+        name: "- testowe",
+        priority: 3.2,
     },
     {
         id: 6,
@@ -38,5 +38,10 @@ export const nutritionalValuesNamesTable = [
         id: 8,
         name: "Sól",
         priority: 6,
+    },
+    {
+        id: 9,
+        name: "Wartość energetyczna",
+        priority: 2,
     },
 ]

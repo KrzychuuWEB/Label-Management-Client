@@ -13,7 +13,7 @@ const FlexLabels = styled('div')(() => ({
     }
 }));
 
-const ProductGetLabelsByBusiness = ({getLabelBusiness, labels, activeTab, isLoading}) => {
+const ProductGetLabelsByBusiness = ({getLabelBusiness, labels, activeTab, isLoading, details}) => {
     const getLabelsByBusiness = (labelsList, business) => {
         let sortLabels = [];
 
@@ -35,8 +35,7 @@ const ProductGetLabelsByBusiness = ({getLabelBusiness, labels, activeTab, isLoad
                             {
                                 getLabelsByBusiness(labels, business).map(label => (
                                     <div key={label.id}>
-                                        <Label displayHover/>
-                                        {label.id}
+                                        <Label displayHover details={details}/>
                                     </div>
                                 ))
                             }

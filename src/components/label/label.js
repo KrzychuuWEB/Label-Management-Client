@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import styled from "@emotion/styled";
 import {Button, Tooltip} from "@mui/material";
 import {Print, Visibility} from "@mui/icons-material";
+import LabelDetail from "@/components/label/labelDetail";
 
 const Root = styled('div')(() => ({
     position: "relative",
@@ -31,7 +32,7 @@ const ActionButtons = styled('div')(() => ({
     top: 0,
 }));
 
-const Label = ({displayHover}) => {
+const Label = ({displayHover, details}) => {
     const [hover, setHover] = useState(false);
 
     return (
@@ -39,7 +40,9 @@ const Label = ({displayHover}) => {
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
-            test
+            {
+                details.map(detail => <LabelDetail key={detail.id} detail={detail}/>)
+            }
 
             {
                 displayHover && (

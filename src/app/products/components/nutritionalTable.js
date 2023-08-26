@@ -2,11 +2,11 @@ import React from "react";
 import {Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField} from "@mui/material";
 import {getIn} from "formik";
 
-const NutritionalTable = ({
-                              formik,
-                              nutritionalValues,
-                              setNutritionalValues
-                          }) => {
+const NutritionalTableForForm = ({
+                                     formik,
+                                     nutritionalValues,
+                                     setNutritionalValues
+                                 }) => {
     const getCheckedNutritionalValuesCount = () => {
         let count = 0;
 
@@ -33,12 +33,42 @@ const NutritionalTable = ({
 
     const handleChangeCheckbox = (id) => {
         const updateState = [...nutritionalValues];
+        let itemPriorityToChange = false;
+        let childStatus = false;
+        let removeCheckbox = false;
 
         updateState.map(item => {
             if (item.id === id) {
                 item.checked = !item.checked;
+
+                if (getAllNutritionalValuesChilds(nutritionalValues, item.priority).length > 0) {
+                    childStatus = item.checked;
+                    itemPriorityToChange = changePriorityFromDecimalToInteger(item.priority);
+                }
+
+                if (getAllNutritionalValuesChilds(nutritionalValues, item.priority + 0.1) && !item.checked) {
+                    removeCheckbox = getAllNutritionalValuesChilds(nutritionalValues, item.priority + 0.1);
+                }
             }
         })
+
+        if (itemPriorityToChange > 0) {
+            updateState.map(item => {
+                if (item.priority === itemPriorityToChange && childStatus) {
+                    item.checked = true
+                }
+            })
+        }
+
+        if (removeCheckbox.length > 0) {
+            for (let x = 0; x < removeCheckbox.length; x++) {
+                for (let i = 0; i < updateState.length; i++) {
+                    if (updateState[i].priority === removeCheckbox[x]) {
+                        updateState[i].checked = false;
+                    }
+                }
+            }
+        }
 
         setNutritionalValues(updateState);
     };
@@ -52,6 +82,25 @@ const NutritionalTable = ({
 
         setNutritionalValues(updateState);
     };
+
+    const changePriorityFromDecimalToInteger = (priority) => {
+        let subStringNumber = priority.toString().substring(0, 1);
+        let number = parseInt(subStringNumber);
+
+        return !Number.isInteger(priority) ? number : false;
+    };
+
+    const getAllNutritionalValuesChilds = (nutritionalValues, priority) => {
+        let count = [];
+
+        nutritionalValues.map(value => {
+            if ((changePriorityFromDecimalToInteger(value.priority) === changePriorityFromDecimalToInteger(priority)) && !Number.isInteger(value.priority)) {
+                count.push(value.priority);
+            }
+        });
+
+        return count;
+    }
 
     return (
         <TableContainer>
@@ -88,7 +137,8 @@ const NutritionalTable = ({
                                     />
                                 </TableCell>
                                 <TableCell onClick={() => handleChangeCheckbox(item.id)}
-                                           align="left">{item.name}</TableCell>
+                                           align="left">{item.name}
+                                </TableCell>
                                 <TableCell align="right">
                                     {
                                         formik.values.nutritionalValues.map((value, index) => {
@@ -120,4 +170,4 @@ const NutritionalTable = ({
     );
 };
 
-export default NutritionalTable;
+export default NutritionalTableForForm;
