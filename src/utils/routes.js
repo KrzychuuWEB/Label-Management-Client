@@ -11,10 +11,11 @@ export const routes = {
     },
     labels: {
         create: "/labels/create",
+        getById: id => `/labels/${id}`,
     },
     products: {
         create: "/products/create",
-        getBySlug: (slug) => `/products/${slug}`,
+        getBySlug: slug => `/products/${slug}`,
     },
     initials: {
         create: "/initials/create",

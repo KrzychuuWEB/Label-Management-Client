@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import CustomTabPanel from "@/components/tab/CustomTabPanel";
 import styled from "@emotion/styled";
 import {
@@ -13,6 +13,8 @@ import {
     Typography
 } from "@mui/material";
 import {AspectRatio, Pattern, Print, Visibility} from "@mui/icons-material";
+import ProductLabelPrintDialog from "@/app/products/[slug]/components/labels/productLabelPrintDialog";
+import {routes} from "@/utils/routes";
 
 const FlexLabels = styled('div')(() => ({
     display: "flex",
@@ -39,6 +41,12 @@ const CustomCard = styled(Card)(({theme}) => ({
 }));
 
 const ProductGetLabelsByBusiness = ({getLabelBusiness, labels, activeTab}) => {
+    const [dialog, setDialog] = useState({open: false, type: "", value: ""});
+
+    const openDialog = (type, value) => setDialog({open: true, type: type, value: value});
+
+    const closeDialog = () => setDialog({open: false, type: "", value: ""});
+
     const getLabelsByBusiness = (labelsList, business) => {
         let sortLabels = [];
 
@@ -59,7 +67,7 @@ const ProductGetLabelsByBusiness = ({getLabelBusiness, labels, activeTab}) => {
                         getLabelsByBusiness(labels, business).map(label => (
                             <CustomCard key={label.id}>
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
+                                    <Typography gutterBottom variant="h6" component="div">
                                         {label.name}
                                     </Typography>
                                     <List>
@@ -78,10 +86,19 @@ const ProductGetLabelsByBusiness = ({getLabelBusiness, labels, activeTab}) => {
                                     </List>
                                 </CardContent>
                                 <CardActions>
-                                    <Button variant="contained" color="secondary">
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={() => openDialog("print", label)}
+                                    >
                                         <Print/>
                                     </Button>
-                                    <Button variant="contained" color="primary">
+                                    <Button
+                                        sx={{marginLeft: 1}}
+                                        variant="contained"
+                                        color="primary"
+                                        href={routes.labels.getById(label.id)}
+                                    >
                                         <Visibility/>
                                     </Button>
                                 </CardActions>
@@ -89,6 +106,15 @@ const ProductGetLabelsByBusiness = ({getLabelBusiness, labels, activeTab}) => {
                         ))
                     }
                 </FlexLabels>
+
+                {
+                    dialog.type === "print" &&
+                        <ProductLabelPrintDialog
+                            open={dialog.open}
+                            handleClose={closeDialog}
+                            label={dialog.value}
+                        />
+                }
             </CustomTabPanel>
         ))
     );
