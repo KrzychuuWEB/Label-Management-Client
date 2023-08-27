@@ -1,45 +1,45 @@
 import React from "react";
-import {Paper, Skeleton, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import {Paper, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 import styled from "@emotion/styled";
+import LoadingTable from "@/components/loading/table";
+import CustomTableRow from "@/components/tables/customTableRow";
+import InfoAlert from "@/components/alerts/infoAlert";
 
 const CustomPaper = styled(Paper)(() => ({
     width: "49%"
 }));
 
-const CustomTableRow = styled(TableRow)(({theme}) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    '&:last-child td, &:last-child th': {
-        border: 0,
-    },
-}));
-
 const NutritionalTableValues = ({product, isLoading}) => {
     return (
         <CustomPaper>
-            {
-                isLoading
-                ? (<Skeleton variant="rectangular" width={"100%"} height={400}/>)
-                    : (<Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Nazwa</TableCell>
-                                <TableCell align="right">Wartość</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {
-                               product.nutritionalValues && product.nutritionalValues.map(item => (
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Nazwa</TableCell>
+                        <TableCell align="right">Wartość</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {
+                        isLoading
+                            ? <LoadingTable cellCount={2}/>
+                            : product.nutritionalValues.length > 0
+                                ? product.nutritionalValues.map(item => (
                                     <CustomTableRow key={item.id}>
                                         <TableCell>{item.nutritional_name_id.name}</TableCell>
                                         <TableCell align="right">{item.value}</TableCell>
                                     </CustomTableRow>
                                 ))
-                            }
-                        </TableBody>
-                    </Table>)
-            }
+                                : <TableRow>
+                                    <TableCell colSpan={2}>
+                                        <InfoAlert>
+                                            Wygląda na to że produkt nie ma przypisanych wartości odżywczych
+                                        </InfoAlert>
+                                    </TableCell>
+                                </TableRow>
+                    }
+                </TableBody>
+            </Table>
         </CustomPaper>
     );
 };

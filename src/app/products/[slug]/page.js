@@ -3,15 +3,10 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "next/navigation";
 import {productsTable} from "@/inMemoryDatabase/products";
-import styled from "@emotion/styled";
-import NutritionalValuesTable from "@/app/products/[slug]/components/productNutritionalValuesTable";
-import ProductInformations from "@/app/products/[slug]/components/productInformations";
 import ProductLabelTabBar from "@/app/products/[slug]/components/labels/productLabelTabBar";
 import ProductGetLabelsByBusiness from "@/app/products/[slug]/components/labels/productGetLabelsByBusiness";
-import {Alert, AlertTitle, Skeleton, SpeedDial, SpeedDialAction, SpeedDialIcon} from "@mui/material";
+import {CircularProgress, Tab, Tabs, Typography} from "@mui/material";
 import {labelsTable} from "@/inMemoryDatabase/labels";
-import {labelDetailsTable} from "@/inMemoryDatabase/labelDetails";
-import {Delete, Edit} from "@mui/icons-material";
 import ProductDeleteDialog from "@/app/products/[slug]/delete";
 import ProductEditDialog from "@/app/products/[slug]/edit";
 import {
@@ -19,28 +14,29 @@ import {
     getSortedNutritionalValuesByPriority
 } from "@/utils/nutritionalValues/nutritionalValuesFunctions";
 import {nutritionalValuesNamesTable} from "@/inMemoryDatabase/nutritionalNames";
+import ProductSpeedDial from "@/app/products/[slug]/components/productSpeedDial";
+import ProductInfoTabPanel from "@/app/products/[slug]/components/tabs/productInfoTabPanel";
+import ProductBatchesTabPanel from "@/app/products/[slug]/components/tabs/productBatchesTabPanel";
+import styled from "@emotion/styled";
+import InfoAlert from "@/components/alerts/infoAlert";
 
-const CustomSpeedDial = styled(SpeedDial)(() => ({
-    position: "fixed",
-    right: 35,
-    bottom: 35,
-}));
-
-const Flex = styled('div')(() => ({
+const LabelLoadingDiv = styled('div')(() => ({
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    marginTop: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    marginTop: 100,
 }));
 
 const GetProductById = () => {
     const params = useParams();
     const productSlug = params.slug;
+    const [productTab, setProductTab] = useState(0);
     const [activeTab, setActiveTab] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [product, setProducts] = useState({});
-    const [labels, setLabels] = useState({});
-    const [details, setDetails] = useState({});
+    const [labels, setLabels] = useState([]);
+    const [batches, setBatches] = useState([]);
     const [dialog, setDialog] = useState({open: false, type: ""});
     const [nutritionalValues, setNutritionalValues] = useState([]);
 
@@ -49,8 +45,9 @@ const GetProductById = () => {
             const addValuesAndChecked = addValueAndCheckedFieldToNutritionalValueNames(nutritionalValuesNamesTable)
             setNutritionalValues(getSortedNutritionalValuesByPriority(addValuesAndChecked))
             setProducts(productsTable[1]);
-            setLabels([labelsTable[0]]);
-            setDetails(labelDetailsTable);
+            setLabels(labelsTable);
+            // setBatches(batchesTable);
+            setBatches([]);
             setIsLoading(false);
         }, 2500);
     }, [productSlug]);
@@ -74,14 +71,20 @@ const GetProductById = () => {
         setActiveTab(tab);
     }
 
+    const changeProductTab = (event, tab) => {
+        setProductTab(tab);
+    }
+
     const getLabelBusiness = (labelsList) => {
         let business = [];
 
-        labelsList.map(label => {
-            if (!business.find(item => item === label.business.name)) {
-                business.push(label.business.name);
-            }
-        });
+        if (labelsList) {
+            labelsList.map(label => {
+                if (!business.find(item => item === label.business.name)) {
+                    business.push(label.business.name);
+                }
+            });
+        }
 
         return business;
     };
@@ -99,38 +102,54 @@ const GetProductById = () => {
 
     return (
         <div>
-            <Flex>
-                <ProductInformations product={product} isLoading={isLoading}/>
+            <Tabs
+                value={productTab}
+                onChange={changeProductTab}
+            >
+                <Tab index={0} label="Informacje"/>
+                <Tab index={1} label="Partie"/>
+            </Tabs>
 
-                <NutritionalValuesTable product={product} isLoading={isLoading}/>
-            </Flex>
+            <ProductInfoTabPanel
+                product={product}
+                tabValue={productTab}
+                isLoading={isLoading}
+                index={0}
+            />
+
+            <ProductBatchesTabPanel
+                tabValue={productTab}
+                isLoading={isLoading}
+                index={1}
+                batches={batches}
+            />
+
             {
                 isLoading
-                    ? <Skeleton variant="rectengular" width="100%" height={150} sx={{marginTop: 5}}/>
+                    ? <LabelLoadingDiv>
+                        <CircularProgress color="primary"/>
+                        <Typography variant="subtitle2" sx={{marginTop: 1}} color="primary">
+                            Wczytywanie etykiet
+                        </Typography>
+                    </LabelLoadingDiv>
                     : labels.length > 0
-                        ? (<div>
+                        ? <div>
                             <ProductLabelTabBar
                                 activeTab={activeTab}
                                 changeTab={changeTab}
                                 labels={labels}
                                 getLabelBusiness={getLabelBusiness}
-                                isLoading={isLoading}
                             />
 
                             <ProductGetLabelsByBusiness
                                 activeTab={activeTab}
                                 getLabelBusiness={getLabelBusiness}
                                 labels={labels}
-                                isLoading={isLoading}
-                                details={details}
                             />
-                        </div>)
-                        : (
-                            <Alert severity="info" sx={{marginTop: 5}}>
-                                <AlertTitle>Brak danych</AlertTitle>
-                                Wygląda na to że produkt <strong>{product.name}</strong> nie ma jeszcze etykiet :(
-                            </Alert>
-                        )
+                        </div>
+                        : <InfoAlert>
+                            Wygląda na to że produkt nie ma jeszcze przypisanych etykiet
+                        </InfoAlert>
             }
 
             {
@@ -152,26 +171,8 @@ const GetProductById = () => {
             }
 
             {
-                !isLoading && (
-                    <CustomSpeedDial
-                        icon={<SpeedDialIcon/>}
-                        ariaLabel="SpeedDial produktu"
-                    >
-                        <SpeedDialAction
-                            icon={<Edit/>}
-                            tooltipTitle="Edytuj"
-                            onClick={() => {
-                                openDialog("edit");
-                                initialValuesForEditForm();
-                            }}
-                        />
-                        <SpeedDialAction
-                            icon={<Delete color="error"/>}
-                            tooltipTitle="Usuń"
-                            onClick={() => openDialog("delete")}
-                        />
-                    </CustomSpeedDial>
-                )
+                !isLoading &&
+                <ProductSpeedDial initialValuesForEditForm={initialValuesForEditForm} openDialog={openDialog}/>
             }
         </div>
     );

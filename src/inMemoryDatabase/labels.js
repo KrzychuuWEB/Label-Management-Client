@@ -10,6 +10,7 @@ export const labelsTable = [
         productId: productsTable[0],
         label_template_id: labelTemplatesTable[0],
         user_id: usersTable[1],
+        name: "Ziele angielskie - 1kg"
     },
     {
         id: 2,
@@ -17,6 +18,7 @@ export const labelsTable = [
         productId: productsTable[1],
         label_template_id: labelTemplatesTable[0],
         user_id: usersTable[1],
+        name: "Ziele angielskie - 5kg"
     },
     {
         id: 3,
@@ -24,5 +26,46 @@ export const labelsTable = [
         productId: productsTable[0],
         label_template_id: labelTemplatesTable[1],
         user_id: usersTable[0],
+        name: "Ziele angielskie - 15kg"
+    },
+    {
+        id: 4,
+        business: companiesTable[0],
+        productId: productsTable[0],
+        label_template_id: labelTemplatesTable[0],
+        user_id: usersTable[1],
+        name: "Ziele angielskie - 25kg"
+    },
+    {
+        id: 5,
+        business: companiesTable[0],
+        productId: productsTable[0],
+        label_template_id: labelTemplatesTable[0],
+        user_id: usersTable[1],
+        name: "Ziele angielskie - 25kg"
+    },
+    {
+        id: 6,
+        business: companiesTable[0],
+        productId: productsTable[0],
+        label_template_id: labelTemplatesTable[0],
+        user_id: usersTable[1],
+        name: "Ziele angielskie - 25kg"
+    },
+    {
+        id: 7,
+        business: companiesTable[0],
+        productId: productsTable[0],
+        label_template_id: labelTemplatesTable[0],
+        user_id: usersTable[1],
+        name: "Ziele angielskie - 25kg"
+    },
+    {
+        id: 8,
+        business: companiesTable[0],
+        productId: productsTable[0],
+        label_template_id: labelTemplatesTable[0],
+        user_id: usersTable[1],
+        name: "Ziele angielskie - 25kg"
     },
 ];
