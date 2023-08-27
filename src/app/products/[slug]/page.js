@@ -19,6 +19,7 @@ import ProductInfoTabPanel from "@/app/products/[slug]/components/tabs/productIn
 import ProductBatchesTabPanel from "@/app/products/[slug]/components/tabs/productBatchesTabPanel";
 import styled from "@emotion/styled";
 import InfoAlert from "@/components/alerts/infoAlert";
+import {batchesTable} from "@/inMemoryDatabase/batches";
 
 const LabelLoadingDiv = styled('div')(() => ({
     display: "flex",
@@ -46,8 +47,7 @@ const GetProductById = () => {
             setNutritionalValues(getSortedNutritionalValuesByPriority(addValuesAndChecked))
             setProducts(productsTable[1]);
             setLabels(labelsTable);
-            // setBatches(batchesTable);
-            setBatches([]);
+            setBatches(batchesTable);
             setIsLoading(false);
         }, 2500);
     }, [productSlug]);
