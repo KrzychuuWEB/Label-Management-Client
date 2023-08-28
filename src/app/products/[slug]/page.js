@@ -5,7 +5,7 @@ import {useParams} from "next/navigation";
 import {productsTable} from "@/inMemoryDatabase/products";
 import ProductLabelTabBar from "@/app/products/[slug]/components/labels/productLabelTabBar";
 import ProductGetLabelsByBusiness from "@/app/products/[slug]/components/labels/productGetLabelsByBusiness";
-import {CircularProgress, Tab, Tabs, Typography} from "@mui/material";
+import {Tab, Tabs} from "@mui/material";
 import {labelsTable} from "@/inMemoryDatabase/labels";
 import ProductDeleteDialog from "@/app/products/[slug]/delete";
 import ProductEditDialog from "@/app/products/[slug]/edit";
@@ -17,17 +17,9 @@ import {nutritionalValuesNamesTable} from "@/inMemoryDatabase/nutritionalNames";
 import ProductSpeedDial from "@/app/products/[slug]/components/productSpeedDial";
 import ProductInfoTabPanel from "@/app/products/[slug]/components/tabs/productInfoTabPanel";
 import ProductBatchesTabPanel from "@/app/products/[slug]/components/tabs/productBatchesTabPanel";
-import styled from "@emotion/styled";
 import InfoAlert from "@/components/alerts/infoAlert";
 import {batchesTable} from "@/inMemoryDatabase/batches";
-
-const LabelLoadingDiv = styled('div')(() => ({
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-    marginTop: 100,
-}));
+import CircularProgressWithTitle from "@/components/loading/circularProgressWithTitle";
 
 const GetProductById = () => {
     const params = useParams();
@@ -126,12 +118,10 @@ const GetProductById = () => {
 
             {
                 isLoading
-                    ? <LabelLoadingDiv>
-                        <CircularProgress color="primary"/>
-                        <Typography variant="subtitle2" sx={{marginTop: 1}} color="primary">
-                            Wczytywanie etykiet
-                        </Typography>
-                    </LabelLoadingDiv>
+                    ? <CircularProgressWithTitle
+                        title="Wczytywanie etykiet"
+                        marginTop={100}
+                    />
                     : labels.length > 0
                         ? <div>
                             <ProductLabelTabBar

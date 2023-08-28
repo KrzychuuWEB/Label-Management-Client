@@ -1,76 +1,36 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "@emotion/styled";
-import {Button, Tooltip} from "@mui/material";
-import {Print, Visibility} from "@mui/icons-material";
 import LabelDetail from "@/components/label/labelDetail";
+import InfoAlert from "@/components/alerts/infoAlert";
+import {Typography} from "@mui/material";
 
 const Root = styled('div')(() => ({
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+}));
+
+const LabelStyled = styled('div')(() => ({
     position: "relative",
     height: 450,
     width: 350,
     border: "1px dashed #000",
 }));
 
-const Hover = styled('div')(() => ({
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    top: 0,
-    left: 0,
-    backgroundColor: "#000",
-    opacity: 0.2,
-}));
-
-const ActionButtons = styled('div')(() => ({
-    position: "absolute",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
-    width: "100%",
-    left: 0,
-    top: 0,
-}));
-
-const Label = ({displayHover, details}) => {
-    const [hover, setHover] = useState(false);
-
+const Label = ({label, details}) => {
     return (
-        <Root
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
-        >
-            {
-                details.map(detail => <LabelDetail key={detail.id} detail={detail}/>)
-            }
-
-            {
-                displayHover && (
-                    <div>
-                        {
-                            hover && (
-                                <div>
-                                    <Hover/>
-
-                                    <ActionButtons>
-                                        <Tooltip title="Drukuj etykietę">
-                                            <Button variant="contained" color="primary" sx={{marginRight: 1}}>
-                                                <Print/>
-                                            </Button>
-                                        </Tooltip>
-
-                                        <Tooltip title="Pokaż etykietę">
-                                            <Button variant="contained" color="secondary">
-                                                <Visibility/>
-                                            </Button>
-                                        </Tooltip>
-                                    </ActionButtons>
-                                </div>
-                            )
-                        }
-                    </div>
-                )
-            }
+        <Root>
+            <Typography variant="body2">
+                {label.label_template_id.width} x {label.label_template_id.height} ({label.label_template_id.name})
+            </Typography>
+            <LabelStyled>
+                {
+                    details.length > 0
+                        ? details.map(detail => <LabelDetail key={detail.id} detail={detail}/>)
+                        : <InfoAlert>Wygląda na to że wygląd etykiety nie został jeszcze dodany!</InfoAlert>
+                }
+            </LabelStyled>
         </Root>
     );
 };

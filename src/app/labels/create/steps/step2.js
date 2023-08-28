@@ -41,8 +41,7 @@ const Menu = styled('div')(() => ({
     marginBottom: 25,
 }));
 
-const CreateLabelStep2 = () => {
-    const [labelTextContent, setLabelTextContent] = useState([]);
+const CreateLabelStep2 = ({labelTextContent, setLabelTextContent}) => {
     const [textEditorContent, setTextEditorContent] = useState();
     const [labelContentId, setLabelContentId] = useState();
     const [textEditorMode, setTextEditorMode] = useState(false);
