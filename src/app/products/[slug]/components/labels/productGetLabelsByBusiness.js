@@ -51,7 +51,7 @@ const ProductGetLabelsByBusiness = ({getLabelBusiness, labels, activeTab}) => {
         let sortLabels = [];
 
         labelsList.map(label => {
-            if (label.business.name === business) {
+            if (label.company_id.name === business) {
                 sortLabels.push(label);
             }
         });

@@ -9,6 +9,8 @@ import CircularProgressWithTitle from "@/components/loading/circularProgressWith
 import styled from "@emotion/styled";
 import GetLabelSpeedDial from "@/app/labels/[id]/components/speedDial";
 import LabelDeleteDialog from "@/app/labels/[id]/delete";
+import LabelEditInformationDialog from "@/app/labels/[id]/editInformationDialog";
+import LabelEditAppearanceDialog from "@/app/labels/[id]/editAppearanceDialog";
 
 const Root = styled('div')(() => ({
     display: "flex",
@@ -16,7 +18,7 @@ const Root = styled('div')(() => ({
     alignItems: "center",
 }));
 
-const GetLabelById = () => {
+const GetLabelByIdPage = () => {
     const params = useParams();
     const labelId = params.id;
     const [label, setLabel] = useState({});
@@ -42,19 +44,36 @@ const GetLabelById = () => {
                 isLoading
                     ? <CircularProgressWithTitle title="Wczytywanie etykiety"/>
                     : <Label label={label} details={labelDetails}>
-
                     </Label>
             }
 
             {
-                dialog.type === "delete" && <LabelDeleteDialog open={open} handleClose={closeDialog} label={label}/>
+                dialog.type === "delete" &&
+                <LabelDeleteDialog open={dialog.open} handleClose={closeDialog} label={label}/>
             }
 
             {
-                !isLoading && <GetLabelSpeedDial openDialog={openDialog}/>
+                dialog.type === "info_edit" && <LabelEditInformationDialog
+                    open={dialog.open}
+                    handleClose={closeDialog}
+                    label={label}
+                />
+            }
+
+            {
+                dialog.type === "appearance_edit" && <LabelEditAppearanceDialog
+                    open={dialog.open}
+                    handleClose={closeDialog}
+                    label={label}
+                />
+            }
+
+            {
+                !isLoading &&
+                <GetLabelSpeedDial openDialog={openDialog}/>
             }
         </Root>
     );
 };
 
-export default GetLabelById;
+export default GetLabelByIdPage;

@@ -5,9 +5,9 @@ import LoadingTable from "@/components/loading/table";
 import {Add, Delete, Edit} from "@mui/icons-material";
 import DeleteBatchDialog from "@/app/products/[slug]/components/batches/delete";
 import EditBatchDialog from "@/app/products/[slug]/components/batches/edit";
-import CustomTableRow from "@/components/tables/customTableRow";
+import CustomTableRow from "@/components/table/customTableRow";
 import CreateBatchDialog from "@/app/products/[slug]/components/batches/create";
-import InfoAlert from "@/components/alerts/infoAlert";
+import InfoAlert from "@/components/alert/infoAlert";
 
 const ProductBatchesTabPanel = ({index, tabValue, isLoading, batches}) => {
     const [batchDialog, setBatchDialog] = useState({open: false, type: "", value: ""});

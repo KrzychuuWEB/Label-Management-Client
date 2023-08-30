@@ -10,7 +10,8 @@ import {useFormik} from "formik";
 import CircularProgressWithTitle from "@/components/loading/circularProgressWithTitle";
 import {labelTemplatesTable} from "@/inMemoryDatabase/labelTemplates";
 import {companiesTable} from "@/inMemoryDatabase/companies";
-import {labelsValidationSchema} from "@/app/labels/create/components/formValid";
+import {labelsValidationSchema} from "@/app/labels/components/formValid";
+import {labelDetailsTable} from "@/inMemoryDatabase/labelDetails";
 
 const steps = [
     "Informacje o etykiecie",
@@ -33,12 +34,12 @@ const CustomButtons = styled('div')(() => ({
 }));
 
 const CreateLabelPage = () => {
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState(1);
     const [isLoading, setIsLoading] = useState(true);
     const [products, setProducts] = useState([]);
     const [templates, setTemplates] = useState([]);
     const [companies, setCompanies] = useState([]);
-    const [labelTextContent, setLabelTextContent] = useState([]);
+    const [labelTextContent, setLabelTextContent] = useState(labelDetailsTable);
 
     useEffect(() => {
         setTimeout(() => {
@@ -46,7 +47,7 @@ const CreateLabelPage = () => {
             setTemplates(labelTemplatesTable);
             setCompanies(companiesTable);
             setIsLoading(false);
-        }, 2500);
+        }, 1500);
     }, []);
 
     const formik = useFormik({

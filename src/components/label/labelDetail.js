@@ -1,16 +1,17 @@
 import React from "react";
 import {Markup} from "interweave";
 
-const LabelDetail = ({detail}) => {
+const LabelDetail = ({detail, children, withoutStyle}) => {
     return (
         <div
-            style={{
+            style={withoutStyle ? {} : {
                 position: "absolute",
-                top: detail.pos_x,
-                left: detail.pos_y
+                transform: `translate(${detail.x}px, ${detail.y}px)`,
             }}
         >
             <Markup content={detail.text}/>
+
+            {children}
         </div>
     );
 };

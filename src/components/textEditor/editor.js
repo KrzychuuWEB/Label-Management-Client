@@ -3,6 +3,7 @@
 import React from "react";
 import ReactQuill from "react-quill";
 import {Button} from "@mui/material";
+import 'react-quill/dist/quill.snow.css';
 
 const TextEditor = ({
                         labelTextContent,

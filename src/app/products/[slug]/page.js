@@ -17,7 +17,7 @@ import {nutritionalValuesNamesTable} from "@/inMemoryDatabase/nutritionalNames";
 import ProductSpeedDial from "@/app/products/[slug]/components/productSpeedDial";
 import ProductInfoTabPanel from "@/app/products/[slug]/components/tabs/productInfoTabPanel";
 import ProductBatchesTabPanel from "@/app/products/[slug]/components/tabs/productBatchesTabPanel";
-import InfoAlert from "@/components/alerts/infoAlert";
+import InfoAlert from "@/components/alert/infoAlert";
 import {batchesTable} from "@/inMemoryDatabase/batches";
 import CircularProgressWithTitle from "@/components/loading/circularProgressWithTitle";
 
@@ -72,8 +72,8 @@ const GetProductById = () => {
 
         if (labelsList) {
             labelsList.map(label => {
-                if (!business.find(item => item === label.business.name)) {
-                    business.push(label.business.name);
+                if (!business.find(item => item === label.company_id.name)) {
+                    business.push(label.company_id.name);
                 }
             });
         }

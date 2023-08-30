@@ -2,8 +2,8 @@ import React from "react";
 import {Paper, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
 import styled from "@emotion/styled";
 import LoadingTable from "@/components/loading/table";
-import CustomTableRow from "@/components/tables/customTableRow";
-import InfoAlert from "@/components/alerts/infoAlert";
+import CustomTableRow from "@/components/table/customTableRow";
+import InfoAlert from "@/components/alert/infoAlert";
 
 const CustomPaper = styled(Paper)(() => ({
     width: "49%"
