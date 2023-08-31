@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styled from "@emotion/styled";
 import {Button, Skeleton, TextField} from "@mui/material";
 import {useFormik} from "formik";
-import {informationValidationSchema} from "@/app/accounts/settings/formValid/informationValidationSchema";
+import {accountInformationValidationSchema} from "@/app/accounts/settings/formValid/accountInformationValidationSchema";
 
 const ButtonDiv = styled('div')(() => ({
     display: "flex",
@@ -24,7 +24,7 @@ const AccountSettingsInformationPanel = ({user, isLoading}) => {
             email: user.email || "",
         },
         enableReinitialize: true,
-        validationSchema: informationValidationSchema,
+        validationSchema: accountInformationValidationSchema,
         onSubmit: values => {
             console.log(values);
         }
